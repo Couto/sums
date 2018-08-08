@@ -11,6 +11,12 @@ A Node library to quickly generate a checksum for multiple types of data. Works 
 $ npm install sums
 ```
 
+or you can install globally if you wish to use the available cli:
+
+```
+$ npm install -g sums
+```
+
 ## Snapshots
 
 Snapshots are a list of checksums and sizes for each file specified. It will also include a total size of all the files, and a checksum of the snapshot as a whole (e.g. `sum(checksum1:checksum2:checksum3)`) to determine if anything in the list of files has changed.
@@ -86,6 +92,35 @@ Generate a snapshot of a list of files, which gives a size and checksum for each
 
 - `options`
   - `algorithm` The hashing algorithm used to generate checksum (defaults to SHA1)
+
+## CLI
+
+The CLI leverages the ability to create a snapshot directly from the terminal. 
+
+### snapshot
+
+```
+$ sums --help
+sums [command]
+
+Commands:
+  sums snapshot [filepath] [files...]  Create a JSON file with the sums of the
+                                         given files
+
+Options:
+  --help           Show help                                           [boolean]
+  --version        Show version number                                 [boolean]
+  --algorithm, -a  Set the checksum algorithm                [default: "sha256"]
+```
+
+A simple use case is:
+
+```
+$ sums snapshot manifest.json build/*.js
+```
+
+This creates a `manifest.json` file with a snapshot as described above,
+containing all JavaScript files that were inside the `build` folder.
 
 ## License
 
